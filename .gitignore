@@ -101,13 +101,4 @@ ENV/
 .mypy_cache/
 
 # Custom
-4250rpm/*
-4500rpm/*
-4750rpm/*
-calibration/*
-characteristics/*
-keyclose/*
-preliminary/*
-pressure/*
-transfer/*
-pointclose/*
+ALL_DATA/*
