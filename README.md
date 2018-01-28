@@ -1,7 +1,13 @@
-# legato-transients
-UNSW Legato Transients Project
+# Characteristics of legato transients in woodwind instruments
+## UNSW Summer Vacation Research Scholarship
+### Leon Bilton
+### UNSW Acoustics
 
-05/01/18 notes
+### Project Goal:
+- To investigate general characteristics of legato transients in woodwind instruments, with specific focus on the fute. The effects of degree of key opening and speed of key motion are targeted. Only single-key (single-finger) transitions are analyzed. Transition times are obtained from time domain data, and effective key opening (and inertance) values from the frequency domain.
 
-- need to update requirements.txt to include audacity.py and peak finding packages
-- found PeakUtils package, might be useful instead of sig.argrelmax -> signal[args], also could be used to find main peaks in distribution of light signal amplitude -> get max and min steady state values for conversion to displacement in metres (use experimentally measured key open distance)
+### Characteristic transitions:
+
+### Effective key opening:
+
+### Effective tone-hole inertance:
