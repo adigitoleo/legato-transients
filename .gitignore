@@ -101,4 +101,5 @@ ENV/
 .mypy_cache/
 
 # Custom
-ALL_DATA/*
+DATA/*
+RESULTS/*
