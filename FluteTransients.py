@@ -55,7 +55,7 @@ def get_tfdata(aupfile, *args, nfft, testing=False):
     chtags = []
     if len(args) == 0:
         if len(data) < 2 or len(data) > 4:
-            raise ValueError("Invalid number of data channels.",
+            raise ValueError("Unrecognised number of data channels.",
                              "Use *args to specify channel numbers")
         else:
             chtags = chnums
@@ -72,7 +72,10 @@ def get_tfdata(aupfile, *args, nfft, testing=False):
     tfxy,ff = tf.tfe(chdict['int'], chdict['ext'], Fs=sr, NFFT=nfft)
     outdict['tf'] = np.array(tfxy)
     outdict['f'] = np.array(ff)
-    outdict['ir'] = np.sqrt(np.mean((chdict['ir']-np.mean(chdict['ir']))**2))
+    for chname, chdata in chdict.items():
+        if chname=='ir':
+            outdict['ir'] = np.sqrt(np.mean((chdata-np.mean(chdata))**2))
+    
     if testing == True:
         delay = tf.determineDelay(
             chdict['src']/np.mean(
@@ -150,13 +153,11 @@ def get_fsdata(aupfile, *args, nfft=1024):
     ------
     returns a dictionary of the data with the following keys:
     'int_fs' : internal fourier spectrum data
-    'int_wf' : internal audio waveform
-    optional keys returned only if infrared channel is given:
-    'ir' : infrared sensor RMS amplitude
-    optional keys returned only if fullout==True:
     'ext_fs' : external fourier spectrum data
     'lab_fs' : labium fourier spectrum data
-    'ext_wf', 'lab_wf' : corresponding waveforms
+    'int_wf', 'ext_wf', 'lab_wf' : corresponding waveforms
+    optional keys returned only if infrared channel is given:
+    'ir' : infrared sensor RMS amplitude
     """
     auf = audacity.Aup(aupfile)
     print(aupfile)
@@ -197,7 +198,6 @@ def get_fsdata(aupfile, *args, nfft=1024):
             fourier = np.fft.rfft(chdata, nfft)
             outdict[chname+'_fs'] = 20*np.log10(np.abs(fourier))
             outdict[chname+'_wf'] = chdata
-    print(sr)
     return outdict
 
 def get_f0(wfdata, lflim, uflim, nfft=1024, sr=44100):
