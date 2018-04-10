@@ -64,10 +64,10 @@ def get_tfdata(aupfile, *args, nfft, testing=False):
         chtags = list(args)
     
     chdict = {}
-    chnames = ['int', 'ext', 'scr', 'ir']
+    chnames = ['int', 'ext', 'src', 'ir']
     for tag, num in zip(chtags, chnums):
         chdict[chnames[num]] = data[tag]
-            
+    
     outdict = {}
     tfxy,ff = tf.tfe(chdict['int'], chdict['ext'], Fs=sr, NFFT=nfft)
     outdict['tf'] = np.array(tfxy)
@@ -83,7 +83,7 @@ def get_tfdata(aupfile, *args, nfft, testing=False):
             maxdel=2**15)
         print("Delay: %d samples" %delay)
         chdict['src'] = np.roll(chdict['src'], delay)
-        for chname, chdata in zip(chnames[1:3], [chdict['int'], chdict['ext']]):
+        for chname, chdata in zip(chnames[0:2], [chdict['int'], chdict['ext']]):
             tfxy,ff = tf.tfe(chdata, chdict['src'], Fs=sr, NFFT=nfft)
             outdict['tf_src_%s' %chname] = np.array(tfxy)
             outdict['f_%s' %chname] = np.array(ff)
