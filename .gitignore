@@ -101,9 +101,5 @@ ENV/
 .mypy_cache/
 
 # Custom
-characteristic_transitions/*
-key_only_recordings/*
-4250rpm/*
-4500rpm/*
-4750rpm/*
-preliminary_recordings/*
+DATA/*
+RESULTS/*
